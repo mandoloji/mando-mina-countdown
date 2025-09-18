@@ -10,9 +10,9 @@ Visit: https://mandoloji.github.io/mando-mina-countdown
 - **Mina**: mina@app.com / mina123
 
 ## ✨ Features
-- ⏰ Live countdown timer
-- 📝 Interactive notes
-- 🖼️ Photo gallery
-- 💝 Real-time sync
+- ⏰ Live countdown to November 13, 2025
+- 📝 Interactive notes with colors and fonts
+- 🖼️ Photo gallery with multiple upload
+- 💝 Real-time sync between users
 
-Built with ❤️ for love! 🙏🏻
+Built with ❤️ for love!

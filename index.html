@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mando & Mina's Countdown App</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #FF6B6B, #FFB6C1);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            color: #FF6B6B;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        .login-form {
+            margin-bottom: 30px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .login-btn {
+            background: #FF6B6B;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+        }
+        .demo-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .demo-btn {
+            background: #F0F0F0;
+            color: #FF6B6B;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            flex: 1;
+        }
+        .features {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .feature {
+            margin: 10px 0;
+            color: #555;
+        }
+        .redirect-msg {
+            background: #E8F5E8;
+            color: #2E7D2E;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💕 Welcome!</h1>
+        <div class="subtitle">Mando & Mina's Special App</div>
+        <div class="subtitle">Counting down to November 13, 2025 ❤️</div>
+        
+        <div class="login-form">
+            <input type="email" id="email" placeholder="Email" />
+            <input type="password" id="password" placeholder="Password" />
+            <button class="login-btn" onclick="handleLogin()">Sign In</button>
+            
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="quickLogin('mando')">Login as Mando</button>
+                <button class="demo-btn" onclick="quickLogin('mina')">Login as Mina</button>
+            </div>
+        </div>
+
+        <div class="redirect-msg" id="redirectMsg">
+            🚀 Redirecting to full app...
+        </div>
+
+        <div class="features">
+            <h3>🚀 Features:</h3>
+            <div class="feature">⏰ Live countdown to November 13, 2025</div>
+            <div class="feature">📝 Interactive note board with your photo background</div>
+            <div class="feature">🖼️ Photo gallery for sharing memories</div>
+            <div class="feature">💝 Real-time synchronization</div>
+        </div>
+
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #E0E0E0; color: #999; font-size: 0.9em;">
+            <p><strong>🔐 Login Credentials:</strong></p>
+            <p>Mando: mando@app.com / mando123</p>
+            <p>Mina: mina@app.com / mina123</p>
+        </div>
+    </div>
+
+    <script>
+        function quickLogin(user) {
+            if (user === 'mando') {
+                document.getElementById('email').value = 'mando@app.com';
+                document.getElementById('password').value = 'mando123';
+            } else {
+                document.getElementById('email').value = 'mina@app.com';
+                document.getElementById('password').value = 'mina123';
+            }
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (!email || !password) {
+                alert('Please enter both email and password');
+                return;
+            }
+
+            // Show redirect message
+            document.getElementById('redirectMsg').style.display = 'block';
+            
+            // Redirect to full app after 2 seconds
+            setTimeout(() => {
+                // This will redirect to the full app when it's available
+                window.location.href = 'http://localhost:3000';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

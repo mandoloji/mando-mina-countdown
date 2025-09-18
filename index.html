@@ -13,7 +13,7 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(135deg, #FF6B6B, #FFB6C1);
             min-height: 100vh;
             touch-action: manipulation;
@@ -25,25 +25,14 @@
             background: white;
             min-height: 100vh;
             position: relative;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
         
         .header {
-            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+            background: #FF6B6B;
             color: white;
             padding: 20px;
             text-align: center;
             position: relative;
-        }
-        
-        .header h1 {
-            font-size: 1.4em;
-            margin-bottom: 5px;
-        }
-        
-        .user-name {
-            opacity: 0.9;
-            font-size: 0.9em;
         }
         
         .logout-btn {
@@ -54,10 +43,9 @@
             border: none;
             color: white;
             padding: 8px 12px;
-            border-radius: 20px;
+            border-radius: 15px;
             cursor: pointer;
             font-size: 0.8em;
-            backdrop-filter: blur(10px);
         }
         
         .countdown-section {
@@ -67,55 +55,36 @@
             border-bottom: 1px solid #f0f0f0;
         }
         
-        .countdown-title {
-            color: #FF6B6B;
-            font-size: 1.1em;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-        
-        .countdown-date {
-            color: #666;
-            margin-bottom: 20px;
-            font-size: 0.9em;
-        }
-        
         .countdown-boxes {
             display: flex;
+            gap: 10px;
             justify-content: space-between;
-            gap: 8px;
         }
         
         .countdown-box {
             flex: 1;
-            background: linear-gradient(135deg, #f8f8f8, #fff);
+            background: #f8f8f8;
             padding: 15px 8px;
             border-radius: 12px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
         .countdown-number {
             font-size: 1.4em;
             font-weight: bold;
             color: #FF6B6B;
-            display: block;
         }
         
         .countdown-label {
             font-size: 0.7em;
             color: #666;
             margin-top: 4px;
-            font-weight: 500;
         }
         
         .navigation {
             display: flex;
             background: white;
             border-bottom: 1px solid #f0f0f0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
         
         .nav-btn {
@@ -126,21 +95,16 @@
             color: #666;
             cursor: pointer;
             border-bottom: 3px solid transparent;
-            font-size: 0.9em;
-            font-weight: 500;
-            transition: all 0.3s ease;
         }
         
         .nav-btn.active {
             color: #FF6B6B;
             border-bottom-color: #FF6B6B;
-            background: rgba(255,107,107,0.05);
         }
         
         .content {
             padding: 20px;
             min-height: 400px;
-            background: #fafafa;
         }
         
         .section {
@@ -151,135 +115,149 @@
             display: block;
         }
         
-        /* Enhanced Notes Section */
-        .notes-container {
-            position: relative;
-            min-height: 400px;
-            background: linear-gradient(45deg, rgba(255,182,193,0.1), rgba(255,107,107,0.1));
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px dashed rgba(255,107,107,0.3);
+        /* Notes Section */
+        .note-controls {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
-        .notes-background-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: rgba(255,107,107,0.2);
-            font-size: 1.5em;
-            font-weight: bold;
-            pointer-events: none;
-            z-index: 1;
+        .control-group {
+            margin-bottom: 10px;
+        }
+        
+        .control-label {
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .color-options, .size-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .color-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+        }
+        
+        .color-btn.selected {
+            border-color: #333;
+        }
+        
+        .size-btn {
+            padding: 6px 12px;
+            border: 2px solid #f0f0f0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+        
+        .size-btn.selected {
+            border-color: #FF6B6B;
+            background: rgba(255,107,107,0.1);
+            color: #FF6B6B;
+        }
+        
+        .notes-container {
+            position: relative;
+            min-height: 300px;
+            background: rgba(255,182,193,0.1);
+            border-radius: 10px;
+            border: 2px dashed rgba(255,107,107,0.3);
         }
         
         .note {
             position: absolute;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 10px;
+            border-radius: 6px;
             min-width: 150px;
             min-height: 100px;
             cursor: move;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
             resize: both;
             overflow: auto;
-            z-index: 10;
-            border: 2px solid rgba(0,0,0,0.1);
-            user-select: none;
-        }
-        
-        .note.selected {
-            border-color: #FF6B6B;
-            z-index: 20;
         }
         
         .note textarea {
             width: 100%;
-            height: 70px;
+            height: 60px;
             border: none;
             background: transparent;
             resize: none;
             font-family: inherit;
             outline: none;
-            font-size: inherit;
-            color: inherit;
         }
         
         .note-author {
             font-size: 0.7em;
             color: #666;
             margin-top: 5px;
-            font-style: italic;
-        }
-        
-        .note-controls {
-            position: absolute;
-            top: -30px;
-            right: 0;
-            display: none;
-            gap: 5px;
-        }
-        
-        .note.selected .note-controls {
-            display: flex;
-        }
-        
-        .note-control-btn {
-            width: 25px;
-            height: 25px;
-            border: none;
-            border-radius: 50%;
-            background: #FF6B6B;
-            color: white;
-            cursor: pointer;
-            font-size: 0.7em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
         .add-note-btn {
             position: fixed;
-            bottom: 90px;
+            bottom: 80px;
             right: 20px;
             width: 55px;
             height: 55px;
-            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+            background: #FF6B6B;
             color: white;
             border: none;
             border-radius: 50%;
-            font-size: 1.8em;
+            font-size: 1.5em;
             cursor: pointer;
-            box-shadow: 0 6px 20px rgba(255,107,107,0.4);
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
             z-index: 1000;
-            transition: transform 0.2s ease;
         }
         
-        .add-note-btn:active {
-            transform: scale(0.95);
+        /* Gallery Section */
+        .upload-area {
+            border: 3px dashed #FF6B6B;
+            border-radius: 10px;
+            padding: 30px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            background: rgba(255,107,107,0.05);
         }
         
-        /* Enhanced Gallery Section */
+        .upload-area:hover {
+            background: rgba(255,107,107,0.1);
+        }
+        
+        .upload-status {
+            background: #e8f5e8;
+            color: #2e7d2e;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
         .photo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
         }
         
         .photo-item {
             aspect-ratio: 1;
             background: #f0f0f0;
-            border-radius: 15px;
+            border-radius: 10px;
             overflow: hidden;
             position: relative;
             cursor: pointer;
-            transition: transform 0.2s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        
-        .photo-item:hover {
-            transform: scale(1.02);
         }
         
         .photo-item img {
@@ -295,42 +273,8 @@
             right: 0;
             background: linear-gradient(transparent, rgba(0,0,0,0.8));
             color: white;
-            padding: 12px;
-            font-size: 0.8em;
-        }
-        
-        .upload-area {
-            border: 3px dashed #FF6B6B;
-            border-radius: 15px;
-            padding: 40px 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(255,107,107,0.02);
-        }
-        
-        .upload-area:hover, .upload-area.dragover {
-            border-color: #FF8E8E;
-            background: rgba(255,107,107,0.1);
-            transform: scale(1.02);
-        }
-        
-        .upload-icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-            display: block;
-        }
-        
-        .upload-text {
-            color: #FF6B6B;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .upload-subtext {
-            font-size: 0.8em;
-            color: #999;
+            padding: 8px;
+            font-size: 0.7em;
         }
         
         /* Login Screen */
@@ -350,52 +294,38 @@
         .login-box {
             background: white;
             padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             width: 90%;
             max-width: 350px;
-            backdrop-filter: blur(10px);
         }
         
         .login-title {
             text-align: center;
             color: #FF6B6B;
-            font-size: 2.2em;
+            font-size: 2em;
             margin-bottom: 30px;
-            font-weight: bold;
         }
         
         .login-input {
             width: 100%;
             padding: 15px;
             margin: 10px 0;
-            border: 2px solid #f0f0f0;
-            border-radius: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
             font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
-        
-        .login-input:focus {
-            outline: none;
-            border-color: #FF6B6B;
         }
         
         .login-btn {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+            background: #FF6B6B;
             color: white;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             font-size: 16px;
             cursor: pointer;
-            margin: 15px 0;
-            font-weight: 600;
-            transition: transform 0.2s ease;
-        }
-        
-        .login-btn:active {
-            transform: scale(0.98);
+            margin: 10px 0;
         }
         
         .demo-buttons {
@@ -406,64 +336,53 @@
         
         .demo-btn {
             flex: 1;
-            padding: 12px;
-            background: rgba(255,107,107,0.1);
+            padding: 10px;
+            background: #f0f0f0;
             color: #FF6B6B;
-            border: 2px solid rgba(255,107,107,0.2);
-            border-radius: 10px;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .demo-btn:hover {
-            background: rgba(255,107,107,0.2);
         }
         
         .hidden {
             display: none !important;
         }
         
-        /* Enhanced Modal */
+        /* Modal */
         .modal {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.5);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 20000;
-            backdrop-filter: blur(5px);
         }
         
         .modal-content {
             background: white;
             padding: 30px;
-            border-radius: 20px;
+            border-radius: 15px;
             width: 90%;
             max-width: 400px;
             max-height: 80vh;
             overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
         
         .modal h3 {
             color: #FF6B6B;
             margin-bottom: 20px;
-            font-size: 1.3em;
         }
         
         .modal button {
-            padding: 12px 20px;
-            margin: 8px;
+            padding: 10px 20px;
+            margin: 5px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-weight: 500;
-            transition: all 0.2s ease;
         }
         
         .primary-btn {
@@ -471,110 +390,9 @@
             color: white;
         }
         
-        .primary-btn:hover {
-            background: #FF8E8E;
-        }
-        
         .secondary-btn {
             background: #f0f0f0;
             color: #666;
-        }
-        
-        .secondary-btn:hover {
-            background: #e0e0e0;
-        }
-        
-        /* Note Customization Panel */
-        .note-panel {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        
-        .panel-section {
-            margin-bottom: 15px;
-        }
-        
-        .panel-label {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-            font-size: 0.9em;
-        }
-        
-        .color-picker {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        
-        .color-option {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 3px solid transparent;
-            transition: all 0.2s ease;
-        }
-        
-        .color-option.selected {
-            border-color: #333;
-            transform: scale(1.1);
-        }
-        
-        .size-picker {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .size-option {
-            padding: 8px 12px;
-            border: 2px solid #f0f0f0;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.8em;
-            transition: all 0.2s ease;
-        }
-        
-        .size-option.selected {
-            border-color: #FF6B6B;
-            background: rgba(255,107,107,0.1);
-            color: #FF6B6B;
-        }
-        
-        /* iOS specific styles */
-        @media (max-width: 480px) {
-            .app-container {
-                max-width: 100%;
-            }
-            
-            .countdown-box {
-                padding: 12px 5px;
-            }
-            
-            .countdown-number {
-                font-size: 1.2em;
-            }
-            
-            .note {
-                min-width: 120px;
-                min-height: 80px;
-            }
-        }
-        
-        /* Smooth animations */
-        * {
-            transition: all 0.2s ease;
-        }
-        
-        .note {
-            transition: transform 0.1s ease, box-shadow 0.2s ease;
-        }
-        
-        .note:hover {
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
     </style>
 </head>
@@ -583,13 +401,13 @@
     <div id="loginScreen" class="login-screen">
         <div class="login-box">
             <h1 class="login-title">💕 Welcome!</h1>
-            <p style="text-align: center; color: #666; margin-bottom: 30px; line-height: 1.5;">
+            <p style="text-align: center; color: #666; margin-bottom: 30px;">
                 Mando & Mina's Special App<br>
-                <small style="color: #FF6B6B; font-weight: 500;">Counting down to November 13, 2025 ❤️</small>
+                <small>Counting down to November 13, 2025 ❤️</small>
             </p>
             
-            <input type="email" id="loginEmail" class="login-input" placeholder="Email" autocomplete="email">
-            <input type="password" id="loginPassword" class="login-input" placeholder="Password" autocomplete="current-password">
+            <input type="email" id="loginEmail" class="login-input" placeholder="Email">
+            <input type="password" id="loginPassword" class="login-input" placeholder="Password">
             <button onclick="handleLogin()" class="login-btn">Sign In</button>
             
             <div class="demo-buttons">
@@ -597,27 +415,25 @@
                 <button class="demo-btn" onclick="quickLogin('mina')">Login as Mina</button>
             </div>
             
-            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.85em; color: #999; text-align: center; line-height: 1.4;">
-                <strong style="color: #FF6B6B;">🔐 Login Credentials:</strong><br>
-                <span style="font-family: monospace;">Mando: mando@app.com / mando123</span><br>
-                <span style="font-family: monospace;">Mina: mina@app.com / mina123</span>
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.9em; color: #999; text-align: center;">
+                <strong>🔐 Login Credentials:</strong><br>
+                Mando: mando@app.com / mando123<br>
+                Mina: mina@app.com / mina123
             </div>
         </div>
     </div>
 
     <!-- Main App -->
     <div id="mainApp" class="app-container hidden">
-        <!-- Header -->
         <div class="header">
             <button class="logout-btn" onclick="logout()">Logout</button>
             <h1>💕 Our Special App</h1>
-            <div class="user-name" id="userName"></div>
+            <div id="userName"></div>
         </div>
 
-        <!-- Countdown Section -->
         <div class="countdown-section">
-            <div class="countdown-title">Countdown to November 13, 2025</div>
-            <div class="countdown-date">Our Special Day ❤️</div>
+            <div style="color: #FF6B6B; font-size: 1.1em; margin-bottom: 8px; font-weight: 600;">Countdown to November 13, 2025</div>
+            <div style="color: #666; margin-bottom: 20px;">Our Special Day ❤️</div>
             <div class="countdown-boxes">
                 <div class="countdown-box">
                     <div class="countdown-number" id="days">0</div>
@@ -638,99 +454,116 @@
             </div>
         </div>
 
-        <!-- Navigation -->
         <div class="navigation">
             <button class="nav-btn active" onclick="showSection('notes')">📝 Notes</button>
             <button class="nav-btn" onclick="showSection('gallery')">🖼️ Gallery</button>
         </div>
 
-        <!-- Content -->
         <div class="content">
             <!-- Notes Section -->
             <div id="notesSection" class="section active">
-                <!-- Note Customization Panel -->
-                <div class="note-panel">
-                    <div class="panel-section">
-                        <div class="panel-label">Note Background Color</div>
-                        <div class="color-picker" id="backgroundColorPicker">
-                            <div class="color-option selected" style="background: #FFFF88" data-color="#FFFF88"></div>
-                            <div class="color-option" style="background: #FFB6C1" data-color="#FFB6C1"></div>
-                            <div class="color-option" style="background: #98FB98" data-color="#98FB98"></div>
-                            <div class="color-option" style="background: #87CEEB" data-color="#87CEEB"></div>
-                            <div class="color-option" style="background: #DDA0DD" data-color="#DDA0DD"></div>
-                            <div class="color-option" style="background: #F0E68C" data-color="#F0E68C"></div>
-                            <div class="color-option" style="background: #FFDAB9" data-color="#FFDAB9"></div>
-                            <div class="color-option" style="background: #E0E0E0" data-color="#E0E0E0"></div>
+                <div class="note-controls">
+                    <div class="control-group">
+                        <span class="control-label">Background Color</span>
+                        <div class="color-options">
+                            <div class="color-btn selected" style="background: #FFFF88" onclick="selectColor('bg', '#FFFF88', this)"></div>
+                            <div class="color-btn" style="background: #FFB6C1" onclick="selectColor('bg', '#FFB6C1', this)"></div>
+                            <div class="color-btn" style="background: #98FB98" onclick="selectColor('bg', '#98FB98', this)"></div>
+                            <div class="color-btn" style="background: #87CEEB" onclick="selectColor('bg', '#87CEEB', this)"></div>
+                            <div class="color-btn" style="background: #DDA0DD" onclick="selectColor('bg', '#DDA0DD', this)"></div>
+                            <div class="color-btn" style="background: #F0E68C" onclick="selectColor('bg', '#F0E68C', this)"></div>
                         </div>
                     </div>
                     
-                    <div class="panel-section">
-                        <div class="panel-label">Text Color</div>
-                        <div class="color-picker" id="textColorPicker">
-                            <div class="color-option selected" style="background: #000000" data-color="#000000"></div>
-                            <div class="color-option" style="background: #FF0000" data-color="#FF0000"></div>
-                            <div class="color-option" style="background: #0000FF" data-color="#0000FF"></div>
-                            <div class="color-option" style="background: #008000" data-color="#008000"></div>
-                            <div class="color-option" style="background: #800080" data-color="#800080"></div>
-                            <div class="color-option" style="background: #FF6B6B" data-color="#FF6B6B"></div>
+                    <div class="control-group">
+                        <span class="control-label">Text Color</span>
+                        <div class="color-options">
+                            <div class="color-btn selected" style="background: #000000" onclick="selectColor('text', '#000000', this)"></div>
+                            <div class="color-btn" style="background: #FF0000" onclick="selectColor('text', '#FF0000', this)"></div>
+                            <div class="color-btn" style="background: #0000FF" onclick="selectColor('text', '#0000FF', this)"></div>
+                            <div class="color-btn" style="background: #008000" onclick="selectColor('text', '#008000', this)"></div>
+                            <div class="color-btn" style="background: #800080" onclick="selectColor('text', '#800080', this)"></div>
+                            <div class="color-btn" style="background: #FF6B6B" onclick="selectColor('text', '#FF6B6B', this)"></div>
                         </div>
                     </div>
                     
-                    <div class="panel-section">
-                        <div class="panel-label">Font Size</div>
-                        <div class="size-picker" id="fontSizePicker">
-                            <div class="size-option" data-size="12">12px</div>
-                            <div class="size-option" data-size="14">14px</div>
-                            <div class="size-option selected" data-size="16">16px</div>
-                            <div class="size-option" data-size="18">18px</div>
-                            <div class="size-option" data-size="20">20px</div>
-                            <div class="size-option" data-size="24">24px</div>
+                    <div class="control-group">
+                        <span class="control-label">Font Size</span>
+                        <div class="size-options">
+                            <div class="size-btn" onclick="selectSize(12, this)">12px</div>
+                            <div class="size-btn" onclick="selectSize(14, this)">14px</div>
+                            <div class="size-btn selected" onclick="selectSize(16, this)">16px</div>
+                            <div class="size-btn" onclick="selectSize(18, this)">18px</div>
+                            <div class="size-btn" onclick="selectSize(20, this)">20px</div>
+                            <div class="size-btn" onclick="selectSize(24, this)">24px</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="notes-container" id="notesContainer">
-                    <div class="notes-background-text">💕 Our Love Notes 💕</div>
-                </div>
+                <div class="notes-container" id="notesContainer"></div>
                 <button class="add-note-btn" onclick="addNote()">+</button>
             </div>
 
             <!-- Gallery Section -->
             <div id="gallerySection" class="section">
-                <div class="upload-area" onclick="uploadPhoto()" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
-                    <span class="upload-icon">📷</span>
-                    <div class="upload-text">Tap to upload photos</div>
-                    <div class="upload-subtext">or drag and drop multiple photos here</div>
+                <div class="upload-area" onclick="uploadPhotos()">
+                    <div style="font-size: 2em; margin-bottom: 10px;">📷</div>
+                    <div style="color: #FF6B6B; font-weight: 600;">Tap to upload photos</div>
+                    <div style="font-size: 0.8em; color: #999; margin-top: 5px;">Multiple photos supported</div>
                 </div>
-                <div class="photo-grid" id="photoGrid">
-                </div>
+                
+                <div class="upload-status" id="uploadStatus"></div>
+                
+                <div class="photo-grid" id="photoGrid"></div>
             </div>
         </div>
     </div>
 
-    <!-- File input for photo upload -->
-    <input type="file" id="photoInput" accept="image/*" multiple style="display: none;" onchange="handlePhotoUpload(event)">
+    <!-- Hidden file input -->
+    <input type="file" id="photoInput" accept="image/*" multiple style="display: none;" onchange="handleMultiplePhotos(event)">
 
     <script>
         let currentUser = null;
-        let notes = JSON.parse(localStorage.getItem('mandoMinaNotes')) || [];
-        let photos = JSON.parse(localStorage.getItem('mandoMinaPhotos')) || [];
-        let selectedNoteId = null;
         let noteSettings = {
             backgroundColor: '#FFFF88',
             textColor: '#000000',
             fontSize: 16
         };
 
+        // Gelişmiş veri saklama sistemi
+        function saveData(key, data) {
+            try {
+                const dataWithTimestamp = {
+                    data: data,
+                    timestamp: new Date().getTime(),
+                    user: currentUser ? currentUser.name : 'unknown'
+                };
+                localStorage.setItem(`mandoMina_${key}`, JSON.stringify(dataWithTimestamp));
+                return true;
+            } catch (e) {
+                console.error('Data save error:', e);
+                return false;
+            }
+        }
+
+        function loadData(key) {
+            try {
+                const stored = localStorage.getItem(`mandoMina_${key}`);
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    return parsed.data || [];
+                }
+                return [];
+            } catch (e) {
+                console.error('Data load error:', e);
+                return [];
+            }
+        }
+
         // Login Functions
         function quickLogin(user) {
-            if (user === 'mando') {
-                document.getElementById('loginEmail').value = 'mando@app.com';
-                document.getElementById('loginPassword').value = 'mando123';
-            } else {
-                document.getElementById('loginEmail').value = 'mina@app.com';
-                document.getElementById('loginPassword').value = 'mina123';
-            }
+            document.getElementById('loginEmail').value = user === 'mando' ? 'mando@app.com' : 'mina@app.com';
+            document.getElementById('loginPassword').value = user === 'mando' ? 'mando123' : 'mina123';
         }
 
         function handleLogin() {
@@ -747,7 +580,7 @@
                 (email === 'mina@app.com' && password === 'mina123');
 
             if (!validCredentials) {
-                alert('Invalid credentials! Please use the provided login details.');
+                alert('Invalid credentials!');
                 return;
             }
 
@@ -760,22 +593,17 @@
             document.getElementById('mainApp').classList.remove('hidden');
             document.getElementById('userName').textContent = `Hello, ${currentUser.name}! 👋`;
 
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            
             startCountdown();
-            loadNotes();
-            loadPhotos();
-            initializeColorPickers();
+            loadAllData();
         }
 
         function logout() {
             currentUser = null;
-            localStorage.removeItem('currentUser');
             document.getElementById('loginScreen').classList.remove('hidden');
             document.getElementById('mainApp').classList.add('hidden');
         }
 
-        // Countdown Functions
+        // Countdown
         function startCountdown() {
             updateCountdown();
             setInterval(updateCountdown, 1000);
@@ -796,11 +624,6 @@
                 document.getElementById('hours').textContent = hours;
                 document.getElementById('minutes').textContent = minutes;
                 document.getElementById('seconds').textContent = seconds;
-            } else {
-                document.getElementById('days').textContent = '0';
-                document.getElementById('hours').textContent = '0';
-                document.getElementById('minutes').textContent = '0';
-                document.getElementById('seconds').textContent = '0';
             }
         }
 
@@ -813,37 +636,25 @@
             event.target.classList.add('active');
         }
 
-        // Color and Size Picker Functions
-        function initializeColorPickers() {
-            // Background color picker
-            document.querySelectorAll('#backgroundColorPicker .color-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    document.querySelectorAll('#backgroundColorPicker .color-option').forEach(o => o.classList.remove('selected'));
-                    this.classList.add('selected');
-                    noteSettings.backgroundColor = this.dataset.color;
-                });
-            });
-
-            // Text color picker
-            document.querySelectorAll('#textColorPicker .color-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    document.querySelectorAll('#textColorPicker .color-option').forEach(o => o.classList.remove('selected'));
-                    this.classList.add('selected');
-                    noteSettings.textColor = this.dataset.color;
-                });
-            });
-
-            // Font size picker
-            document.querySelectorAll('#fontSizePicker .size-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    document.querySelectorAll('#fontSizePicker .size-option').forEach(o => o.classList.remove('selected'));
-                    this.classList.add('selected');
-                    noteSettings.fontSize = parseInt(this.dataset.size);
-                });
-            });
+        // Note Controls
+        function selectColor(type, color, element) {
+            if (type === 'bg') {
+                document.querySelectorAll('.color-options')[0].querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('selected'));
+                noteSettings.backgroundColor = color;
+            } else {
+                document.querySelectorAll('.color-options')[1].querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('selected'));
+                noteSettings.textColor = color;
+            }
+            element.classList.add('selected');
         }
 
-        // Enhanced Notes Functions
+        function selectSize(size, element) {
+            document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
+            element.classList.add('selected');
+            noteSettings.fontSize = size;
+        }
+
+        // Notes Functions
         function addNote() {
             const noteText = prompt('Enter your note:');
             if (!noteText) return;
@@ -852,61 +663,36 @@
                 id: Date.now(),
                 text: noteText,
                 author: currentUser.name,
-                x: Math.random() * 200 + 20,
-                y: Math.random() * 200 + 20,
-                width: 180,
-                height: 120,
+                x: Math.random() * 150 + 20,
+                y: Math.random() * 150 + 20,
                 backgroundColor: noteSettings.backgroundColor,
                 textColor: noteSettings.textColor,
                 fontSize: noteSettings.fontSize,
                 created: new Date().toISOString()
             };
 
+            const notes = loadData('notes');
             notes.push(note);
-            localStorage.setItem('mandoMinaNotes', JSON.stringify(notes));
+            saveData('notes', notes);
             renderNote(note);
         }
 
         function renderNote(note) {
-            const noteElement = document.createElement('div');
-            noteElement.className = 'note';
-            noteElement.id = `note-${note.id}`;
-            noteElement.style.left = note.x + 'px';
-            noteElement.style.top = note.y + 'px';
-            noteElement.style.width = note.width + 'px';
-            noteElement.style.height = note.height + 'px';
-            noteElement.style.backgroundColor = note.backgroundColor;
-            noteElement.style.color = note.textColor;
-            noteElement.style.fontSize = note.fontSize + 'px';
+            const noteEl = document.createElement('div');
+            noteEl.className = 'note';
+            noteEl.style.left = note.x + 'px';
+            noteEl.style.top = note.y + 'px';
+            noteEl.style.backgroundColor = note.backgroundColor;
+            noteEl.style.color = note.textColor;
+            noteEl.style.fontSize = note.fontSize + 'px';
             
-            noteElement.innerHTML = `
-                <div class="note-controls">
-                    <button class="note-control-btn" onclick="deleteNote('${note.id}')" title="Delete">×</button>
-                </div>
-                <textarea onchange="updateNote('${note.id}', this.value)" placeholder="Enter your note...">${note.text}</textarea>
+            noteEl.innerHTML = `
+                <textarea onchange="updateNoteText(${note.id}, this.value)">${note.text}</textarea>
                 <div class="note-author">- ${note.author}</div>
             `;
 
-            noteElement.addEventListener('click', () => selectNote(note.id));
-            makeNoteDraggable(noteElement, note);
-            makeNoteResizable(noteElement, note);
-            
-            document.getElementById('notesContainer').appendChild(noteElement);
-        }
-
-        function selectNote(noteId) {
-            selectedNoteId = noteId;
-            document.querySelectorAll('.note').forEach(n => n.classList.remove('selected'));
-            document.getElementById(`note-${noteId}`).classList.add('selected');
-        }
-
-        function deleteNote(noteId) {
-            if (confirm('Are you sure you want to delete this note?')) {
-                notes = notes.filter(n => n.id !== noteId);
-                localStorage.setItem('mandoMinaNotes', JSON.stringify(notes));
-                document.getElementById(`note-${noteId}`).remove();
-                selectedNoteId = null;
-            }
+            makeNoteDraggable(noteEl, note);
+            document.getElementById('notesContainer').appendChild(noteEl);
         }
 
         function makeNoteDraggable(element, note) {
@@ -914,11 +700,10 @@
             let startX, startY, initialLeft, initialTop;
 
             element.addEventListener('mousedown', startDrag);
-            element.addEventListener('touchstart', startDrag, { passive: false });
+            element.addEventListener('touchstart', startDrag);
 
             function startDrag(e) {
-                if (e.target.tagName.toLowerCase() === 'textarea' || e.target.classList.contains('note-control-btn')) return;
-                
+                if (e.target.tagName === 'TEXTAREA') return;
                 isDragging = true;
                 const touch = e.touches ? e.touches[0] : e;
                 startX = touch.clientX;
@@ -926,14 +711,10 @@
                 initialLeft = parseInt(element.style.left);
                 initialTop = parseInt(element.style.top);
                 
-                element.style.zIndex = '1000';
-                
                 document.addEventListener('mousemove', drag);
-                document.addEventListener('touchmove', drag, { passive: false });
+                document.addEventListener('touchmove', drag);
                 document.addEventListener('mouseup', stopDrag);
                 document.addEventListener('touchend', stopDrag);
-                
-                e.preventDefault();
             }
 
             function drag(e) {
@@ -944,21 +725,22 @@
                 const deltaX = touch.clientX - startX;
                 const deltaY = touch.clientY - startY;
                 
-                const newLeft = Math.max(0, Math.min(initialLeft + deltaX, window.innerWidth - note.width));
-                const newTop = Math.max(0, Math.min(initialTop + deltaY, window.innerHeight - note.height));
-                
-                element.style.left = newLeft + 'px';
-                element.style.top = newTop + 'px';
+                element.style.left = Math.max(0, initialLeft + deltaX) + 'px';
+                element.style.top = Math.max(0, initialTop + deltaY) + 'px';
             }
 
             function stopDrag() {
                 if (isDragging) {
                     note.x = parseInt(element.style.left);
                     note.y = parseInt(element.style.top);
-                    updateNoteInStorage(note);
+                    const notes = loadData('notes');
+                    const index = notes.findIndex(n => n.id === note.id);
+                    if (index !== -1) {
+                        notes[index] = note;
+                        saveData('notes', notes);
+                    }
                 }
                 isDragging = false;
-                element.style.zIndex = '10';
                 document.removeEventListener('mousemove', drag);
                 document.removeEventListener('touchmove', drag);
                 document.removeEventListener('mouseup', stopDrag);
@@ -966,88 +748,84 @@
             }
         }
 
-        function makeNoteResizable(element, note) {
-            const resizeObserver = new ResizeObserver(entries => {
-                for (let entry of entries) {
-                    const { width, height } = entry.contentRect;
-                    note.width = width;
-                    note.height = height;
-                    updateNoteInStorage(note);
-                }
-            });
-            resizeObserver.observe(element);
-        }
-
-        function updateNote(noteId, newText) {
-            const note = notes.find(n => n.id == noteId);
-            if (note) {
-                note.text = newText;
-                updateNoteInStorage(note);
-            }
-        }
-
-        function updateNoteInStorage(note) {
-            const index = notes.findIndex(n => n.id === note.id);
+        function updateNoteText(noteId, newText) {
+            const notes = loadData('notes');
+            const index = notes.findIndex(n => n.id === noteId);
             if (index !== -1) {
-                notes[index] = note;
-                localStorage.setItem('mandoMinaNotes', JSON.stringify(notes));
+                notes[index].text = newText;
+                saveData('notes', notes);
             }
         }
 
-        function loadNotes() {
-            document.getElementById('notesContainer').innerHTML = '<div class="notes-background-text">💕 Our Love Notes 💕</div>';
-            notes.forEach(note => renderNote(note));
-        }
-
-        // Enhanced Photo Functions
-        function uploadPhoto() {
+        // Gelişmiş Çoklu Fotoğraf Yükleme
+        function uploadPhotos() {
             document.getElementById('photoInput').click();
         }
 
-        function handlePhotoUpload(event) {
+        function handleMultiplePhotos(event) {
             const files = Array.from(event.target.files);
-            files.forEach(file => processPhotoFile(file));
-        }
+            const status = document.getElementById('uploadStatus');
+            
+            if (files.length === 0) return;
+            
+            status.style.display = 'block';
+            status.textContent = `Uploading ${files.length} photo(s)...`;
+            
+            let completed = 0;
+            const photos = loadData('photos');
+            
+            files.forEach((file, index) => {
+                if (!file.type.startsWith('image/')) {
+                    completed++;
+                    if (completed === files.length) {
+                        status.textContent = `Successfully uploaded ${completed} photo(s)!`;
+                        setTimeout(() => status.style.display = 'none', 3000);
+                    }
+                    return;
+                }
 
-        function processPhotoFile(file) {
-            if (!file.type.startsWith('image/')) {
-                alert('Please select only image files.');
-                return;
-            }
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const photo = {
+                        id: Date.now() + index,
+                        data: e.target.result,
+                        uploader: currentUser.name,
+                        uploadDate: new Date().toLocaleDateString(),
+                        uploadTime: new Date().toLocaleTimeString(),
+                        filename: file.name,
+                        size: (file.size / 1024 / 1024).toFixed(2) + ' MB'
+                    };
 
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const photo = {
-                    id: Date.now() + Math.random(),
-                    data: e.target.result,
-                    uploader: currentUser.name,
-                    uploadDate: new Date().toLocaleDateString(),
-                    uploadTime: new Date().toLocaleTimeString(),
-                    filename: file.name,
-                    size: (file.size / 1024 / 1024).toFixed(2) + ' MB'
+                    photos.unshift(photo);
+                    completed++;
+                    
+                    // Update status
+                    status.textContent = `Uploaded ${completed}/${files.length} photos...`;
+                    
+                    if (completed === files.length) {
+                        saveData('photos', photos);
+                        loadPhotos();
+                        status.textContent = `Successfully uploaded ${files.length} photo(s)!`;
+                        setTimeout(() => status.style.display = 'none', 3000);
+                    }
                 };
-
-                photos.unshift(photo); // Add to beginning of array
-                localStorage.setItem('mandoMinaPhotos', JSON.stringify(photos));
-                renderPhoto(photo);
-            };
-            reader.readAsDataURL(file);
+                reader.readAsDataURL(file);
+            });
         }
 
         function renderPhoto(photo) {
-            const photoElement = document.createElement('div');
-            photoElement.className = 'photo-item';
-            photoElement.innerHTML = `
+            const photoEl = document.createElement('div');
+            photoEl.className = 'photo-item';
+            photoEl.innerHTML = `
                 <img src="${photo.data}" alt="${photo.filename}" loading="lazy">
                 <div class="photo-overlay">
-                    <div style="font-weight: 600;">📷 ${photo.uploader}</div>
-                    <div style="font-size: 0.7em; opacity: 0.9;">${photo.uploadDate} ${photo.uploadTime}</div>
-                    <div style="font-size: 0.6em; opacity: 0.7;">${photo.size}</div>
+                    <div>📷 ${photo.uploader}</div>
+                    <div>${photo.uploadDate}</div>
                 </div>
             `;
             
-            photoElement.onclick = () => showPhotoModal(photo);
-            document.getElementById('photoGrid').insertBefore(photoElement, document.getElementById('photoGrid').firstChild);
+            photoEl.onclick = () => showPhotoModal(photo);
+            document.getElementById('photoGrid').appendChild(photoEl);
         }
 
         function showPhotoModal(photo) {
@@ -1056,92 +834,48 @@
             modal.innerHTML = `
                 <div class="modal-content">
                     <h3>📷 Photo by ${photo.uploader}</h3>
-                    <img src="${photo.data}" style="width: 100%; border-radius: 12px; margin-bottom: 15px;">
-                    <div style="background: #f8f8f8; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                        <p><strong>📅 Uploaded:</strong> ${photo.uploadDate} at ${photo.uploadTime}</p>
-                        <p><strong>📁 Filename:</strong> ${photo.filename}</p>
-                        <p><strong>📏 Size:</strong> ${photo.size}</p>
-                    </div>
-                    <div style="text-align: right;">
+                    <img src="${photo.data}" style="width: 100%; border-radius: 10px; margin-bottom: 15px;">
+                    <p><strong>Uploaded:</strong> ${photo.uploadDate} ${photo.uploadTime}</p>
+                    <p><strong>Size:</strong> ${photo.size}</p>
+                    <div style="text-align: right; margin-top: 20px;">
                         <button class="secondary-btn" onclick="this.closest('.modal').remove()">Close</button>
                         <button class="primary-btn" onclick="downloadPhoto('${photo.data}', '${photo.filename}')">Download</button>
-                        ${photo.uploader === currentUser.name ? `<button class="secondary-btn" style="background: #ffebee; color: #d32f2f;" onclick="deletePhoto('${photo.id}')">Delete</button>` : ''}
                     </div>
                 </div>
             `;
             
             document.body.appendChild(modal);
-            
-            // Close modal when clicking outside
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.remove();
-                }
-            });
-        }
-
-        function deletePhoto(photoId) {
-            if (confirm('Are you sure you want to delete this photo?')) {
-                photos = photos.filter(p => p.id != photoId);
-                localStorage.setItem('mandoMinaPhotos', JSON.stringify(photos));
-                document.querySelector('.modal').remove();
-                loadPhotos();
-            }
+            modal.onclick = (e) => e.target === modal && modal.remove();
         }
 
         function downloadPhoto(dataUrl, filename) {
             const link = document.createElement('a');
             link.href = dataUrl;
             link.download = filename;
-            document.body.appendChild(link);
             link.click();
-            document.body.removeChild(link);
+        }
+
+        function loadAllData() {
+            loadNotes();
+            loadPhotos();
+        }
+
+        function loadNotes() {
+            document.getElementById('notesContainer').innerHTML = '';
+            const notes = loadData('notes');
+            notes.forEach(note => renderNote(note));
         }
 
         function loadPhotos() {
             document.getElementById('photoGrid').innerHTML = '';
+            const photos = loadData('photos');
             photos.forEach(photo => renderPhoto(photo));
-        }
-
-        // Drag and Drop for Photos
-        function handleDragOver(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            e.currentTarget.classList.add('dragover');
-        }
-
-        function handleDragLeave(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            e.currentTarget.classList.remove('dragover');
-        }
-
-        function handleDrop(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            e.currentTarget.classList.remove('dragover');
-            
-            const files = Array.from(e.dataTransfer.files);
-            files.forEach(file => processPhotoFile(file));
         }
 
         // Initialize app
         window.addEventListener('load', function() {
-            const savedUser = localStorage.getItem('currentUser');
-            if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                document.getElementById('loginScreen').classList.add('hidden');
-                document.getElementById('mainApp').classList.remove('hidden');
-                document.getElementById('userName').textContent = `Hello, ${currentUser.name}! 👋`;
-                startCountdown();
-                loadNotes();
-                loadPhotos();
-                initializeColorPickers();
-            }
+            updateCountdown();
         });
-
-        // Add touch event handling for better iOS experience
-        document.addEventListener('touchstart', function() {}, { passive: true });
     </script>
 </body>
 </html>

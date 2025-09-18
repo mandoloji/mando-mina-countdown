@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mando & Mina's Countdown App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #FF6B6B, #FFB6C1);
+            min-height: 100vh;
+        }
+        
+        .app-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .header {
+            background: #FF6B6B;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+        
+        .user-name {
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+        
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+        
+        .countdown-section {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .countdown-title {
+            color: #FF6B6B;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .countdown-date {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .countdown-boxes {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        
+        .countdown-box {
+            flex: 1;
+            background: #f8f8f8;
+            padding: 15px 5px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .countdown-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #FF6B6B;
+        }
+        
+        .countdown-label {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .navigation {
+            display: flex;
+            background: white;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .nav-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: white;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .nav-btn.active {
+            color: #FF6B6B;
+            border-bottom-color: #FF6B6B;
+        }
+        
+        .content {
+            padding: 20px;
+            min-height: 400px;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .notes-container {
+            position: relative;
+            min-height: 400px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23FFB6C1" opacity="0.3"/><text x="200" y="150" text-anchor="middle" fill="%23FF6B6B" font-size="20" opacity="0.5">💕 Our Notes 💕</text></svg>') center/cover;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .note {
+            position: absolute;
+            background: #FFFF88;
+            padding: 10px;
+            border-radius: 5px;
+            min-width: 150px;
+            min-height: 100px;
+            cursor: move;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            resize: both;
+            overflow: auto;
+        }
+        
+        .note textarea {
+            width: 100%;
+            height: 80px;
+            border: none;
+            background: transparent;
+            resize: none;
+            font-family: inherit;
+        }
+        
+        .note-author {
+            font-size: 0.7em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .add-note-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #FF6B6B;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .photo-item {
+            aspect-ratio: 1;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 10px;
+            font-size: 0.8em;
+        }
+        
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        
+        .upload-area:hover {
+            border-color: #FF6B6B;
+            background: rgba(255,107,107,0.05);
+        }
+        
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #FF6B6B, #FFB6C1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 350px;
+        }
+        
+        .login-title {
+            text-align: center;
+            color: #FF6B6B;
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+        
+        .login-input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: #FF6B6B;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        
+        .demo-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .demo-btn {
+            flex: 1;
+            padding: 10px;
+            background: #f0f0f0;
+            color: #FF6B6B;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+        }
+        
+        .modal h3 {
+            color: #FF6B6B;
+            margin-bottom: 20px;
+        }
+        
+        .modal button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .primary-btn {
+            background: #FF6B6B;
+            color: white;
+        }
+        
+        .secondary-btn {
+            background: #f0f0f0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginScreen" class="login-screen">
+        <div class="login-box">
+            <h1 class="login-title">💕 Welcome!</h1>
+            <p style="text-align: center; color: #666; margin-bottom: 30px;">
+                Mando & Mina's Special App<br>
+                <small>Counting down to November 13, 2025 ❤️</small>
+            </p>
+            
+            <input type="email" id="loginEmail" class="login-input" placeholder="Email">
+            <input type="password" id="loginPassword" class="login-input" placeholder="Password">
+            <button onclick="handleLogin()" class="login-btn">Sign In</button>
+            
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="quickLogin('mando')">Login as Mando</button>
+                <button class="demo-btn" onclick="quickLogin('mina')">Login as Mina</button>
+            </div>
+            
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.9em; color: #999; text-align: center;">
+                <strong>🔐 Login Credentials:</strong><br>
+                Mando: mando@app.com / mando123<br>
+                Mina: mina@app.com / mina123
+            </div>
+        </div>
+    </div>
+
+    <div id="mainApp" class="app-container hidden">
+        <div class="header">
+            <button class="logout-btn" onclick="logout()">Logout</button>
+            <h1>💕 Our Special App</h1>
+            <div class="user-name" id="userName"></div>
+        </div>
+
+        <div class="countdown-section">
+            <div class="countdown-title">Countdown to November 13, 2025</div>
+            <div class="countdown-date">Our Special Day ❤️</div>
+            <div class="countdown-boxes">
+                <div class="countdown-box">
+                    <div class="countdown-number" id="days">0</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="hours">0</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="minutes">0</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="seconds">0</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn active" onclick="showSection('notes')">📝 Notes</button>
+            <button class="nav-btn" onclick="showSection('gallery')">🖼️ Gallery</button>
+        </div>
+
+        <div class="content">
+            <div id="notesSection" class="section active">
+                <div class="notes-container" id="notesContainer">
+                </div>
+                <button class="add-note-btn" onclick="addNote()">+</button>
+            </div>
+
+            <div id="gallerySection" class="section">
+                <div class="upload-area" onclick="uploadPhoto()">
+                    <div style="font-size: 2em; margin-bottom: 10px;">📷</div>
+                    <div>Tap to upload a photo</div>
+                    <div style="font-size: 0.8em; color: #999; margin-top: 5px;">Share your memories</div>
+                </div>
+                <div class="photo-grid" id="photoGrid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
+
+    <script>
+        let currentUser = null;
+        let notes = JSON.parse(localStorage.getItem('mandoMinaNotes')) || [];
+        let photos = JSON.parse(localStorage.getItem('mandoMinaPhotos')) || [];
+
+        function quickLogin(user) {
+            if (user === 'mando') {
+                document.getElementById('loginEmail').value = 'mando@app.com';
+                document.getElementById('loginPassword').value = 'mando123';
+            } else {
+                document.getElementById('loginEmail').value = 'mina@app.com';
+                document.getElementById('loginPassword').value = 'mina123';
+            }
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (!email || !password) {
+                alert('Please enter both email and password');
+                return;
+            }
+
+            const validCredentials = 
+                (email === 'mando@app.com' && password === 'mando123') ||
+                (email === 'mina@app.com' && password === 'mina123');
+
+            if (!validCredentials) {
+                alert('Invalid credentials!');
+                return;
+            }
+
+            currentUser = {
+                name: email.includes('mando') ? 'Mando' : 'Mina',
+                email: email
+            };
+
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('mainApp').classList.remove('hidden');
+            document.getElementById('userName').textContent = `Hello, ${currentUser.name}! 👋`;
+
+            startCountdown();
+            loadNotes();
+            loadPhotos();
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('mainApp').classList.add('hidden');
+        }
+
+        function startCountdown() {
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        function updateCountdown() {
+            const targetDate = new Date('2025-11-13T00:00:00').getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+            }
+        }
+
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(section + 'Section').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function addNote() {
+            const noteText = prompt('Enter your note:');
+            if (!noteText) return;
+
+            const note = {
+                id: Date.now(),
+                text: noteText,
+                author: currentUser.name,
+                x: Math.random() * 200,
+                y: Math.random() * 200,
+                color: '#FFFF88'
+            };
+
+            notes.push(note);
+            localStorage.setItem('mandoMinaNotes', JSON.stringify(notes));
+            renderNote(note);
+        }
+
+        function renderNote(note) {
+            const noteElement = document.createElement('div');
+            noteElement.className = 'note';
+            noteElement.style.left = note.x + 'px';
+            noteElement.style.top = note.y + 'px';
+            noteElement.style.backgroundColor = note.color;
+            
+            noteElement.innerHTML = `
+                <textarea onchange="updateNote(${note.id}, this.value)">${note.text}</textarea>
+                <div class="note-author">- ${note.author}</div>
+            `;
+
+            makeNoteDraggable(noteElement, note);
+            
+            document.getElementById('notesContainer').appendChild(noteElement);
+        }
+
+        function makeNoteDraggable(element, note) {
+            let isDragging = false;
+            let startX, startY, initialLeft, initialTop;
+
+            element.addEventListener('mousedown', startDrag);
+            element.addEventListener('touchstart', startDrag);
+
+            function startDrag(e) {
+                isDragging = true;
+                const touch = e.touches ? e.touches[0] : e;
+                startX = touch.clientX;
+                startY = touch.clientY;
+                initialLeft = parseInt(element.style.left);
+                initialTop = parseInt(element.style.top);
+                
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('touchmove', drag);
+                document.addEventListener('mouseup', stopDrag);
+                document.addEventListener('touchend', stopDrag);
+            }
+
+            function drag(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                
+                const touch = e.touches ? e.touches[0] : e;
+                const deltaX = touch.clientX - startX;
+                const deltaY = touch.clientY - startY;
+                
+                const newLeft = initialLeft + deltaX;
+                const newTop = initialTop + deltaY;
+                
+                element.style.left = Math.max(0, newLeft) + 'px';
+                element.style.top = Math.max(0, newTop) + 'px';
+            }
+
+            function stopDrag() {
+                if (isDragging) {
+                    note.x = parseInt(element.style.left);
+                    note.y = parseInt(element.style.top);
+                    localStorage.setItem('mandoMinaNotes', JSON.stringify(notes));
+                }
+                isDragging = false;
+                document.removeEventListener('mousemove', drag);
+                document.removeEventListener('touchmove', drag);
+                document.removeEventListener('mouseup', stopDrag);
+                document.removeEventListener('touchend', stopDrag);
+            }
+        }
+
+        function updateNote(noteId, newText) {
+            const note = notes.find(n => n.id === noteId);
+            if (note) {
+                note.text = newText;
+                localStorage.setItem('mandoMinaNotes', JSON.stringify(notes));
+            }
+        }
+
+        function loadNotes() {
+            document.getElementById('notesContainer').innerHTML = '';
+            notes.forEach(note => renderNote(note));
+        }
+
+        function uploadPhoto() {
+            document.getElementById('photoInput').click();
+        }
+
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const photo = {
+                    id: Date.now(),
+                    data: e.target.result,
+                    uploader: currentUser.name,
+                    uploadDate: new Date().toLocaleDateString(),
+                    filename: file.name
+                };
+
+                photos.push(photo);
+                localStorage.setItem('mandoMinaPhotos', JSON.stringify(photos));
+                renderPhoto(photo);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function renderPhoto(photo) {
+            const photoElement = document.createElement('div');
+            photoElement.className = 'photo-item';
+            photoElement.innerHTML = `
+                <img src="${photo.data}" alt="${photo.filename}">
+                <div class="photo-overlay">
+                    <div>📷 ${photo.uploader}</div>
+                    <div style="font-size: 0.7em; opacity: 0.8;">${photo.uploadDate}</div>
+                </div>
+            `;
+            
+            photoElement.onclick = () => showPhotoModal(photo);
+            document.getElementById('photoGrid').appendChild(photoElement);
+        }
+
+        function showPhotoModal(photo) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <h3>📷 Photo by ${photo.uploader}</h3>
+                    <img src="${photo.data}" style="width: 100%; border-radius: 10px; margin-bottom: 15px;">
+                    <p><strong>Uploaded:</strong> ${photo.uploadDate}</p>
+                    <p><strong>Filename:</strong> ${photo.filename}</p>
+                    <div style="text-align: right; margin-top: 20px;">
+                        <button class="secondary-btn" onclick="this.closest('.modal').remove()">Close</button>
+                        <button class="primary-btn" onclick="downloadPhoto('${photo.data}', '${photo.filename}')">Download</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function downloadPhoto(dataUrl, filename) {
+            const link = document.createElement('a');
+            link.href = dataUrl;
+            link.download = filename;
+            link.click();
+        }
+
+        function loadPhotos() {
+            document.getElementById('photoGrid').innerHTML = '';
+            photos.forEach(photo => renderPhoto(photo));
+        }
+
+        window.addEventListener('load', function() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('mainApp').classList.remove('hidden');
+                document.getElementById('userName').textContent = `Hello, ${currentUser.name}! 👋`;
+                startCountdown();
+                loadNotes();
+                loadPhotos();
+            }
+        });
+    </script>
+</body>
+</html>

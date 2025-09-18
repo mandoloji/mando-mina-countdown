@@ -15,4 +15,4 @@ Visit: https://mandoloji.github.io/mando-mina-countdown
 - 🖼️ Photo gallery
 - 💝 Real-time sync
 
-Built with ❤️ for love!
+Built with ❤️ for love! 🙏🏻
